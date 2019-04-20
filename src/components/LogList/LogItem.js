@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 
+import Alert from 'react-s-alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { firebaseLogs } from '../../firebase';
 
 const LogContainer = styled('div')`
 	grid-gap: 1rem;
@@ -32,7 +34,6 @@ const ButtonsContainer = styled('span')`
 
 const LogItem = ({ log }) => {
 	const displayDates = log => {
-		console.log(log);
 		const posted = moment(log.date).format('MMM DD YYYY •  hh:mm a');
 		const edited = `${
 			log.lastEdit
@@ -44,13 +45,30 @@ const LogItem = ({ log }) => {
 		return `${posted} ${edited}`;
 	};
 
+	const deleteLog = () => {
+		const id = log.id;
+		firebaseLogs
+			.child(`${id}`)
+			.remove()
+			.then(() => {
+				Alert.warning('Log deleted!', {
+					position: 'top-right',
+					timeout: 2000
+				});
+			});
+	};
+
 	return (
 		<LogContainer>
 			<UtilContainer>
 				<Text>{displayDates(log)} </Text>
 				<ButtonsContainer>
-					<FontAwesomeIcon icon='edit' />
-					<FontAwesomeIcon icon='trash' onClick={this.deleteLog} />
+					<Text>
+						<FontAwesomeIcon icon='edit' />
+					</Text>
+					<Text onClick={deleteLog}>
+						<FontAwesomeIcon icon='trash' />
+					</Text>
 				</ButtonsContainer>
 			</UtilContainer>
 			<Text>{log.content}</Text>

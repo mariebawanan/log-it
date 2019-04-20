@@ -101,7 +101,7 @@ class LogInput extends Component {
 			.push(dataToSubmit)
 			.then(() => {
 				this.setState({ logContent: '' });
-				Alert.success('Log successfully added!', {
+				Alert.success('Log added!', {
 					position: 'top-right',
 					timeout: 2000
 				});

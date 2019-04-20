@@ -35,15 +35,13 @@ const Title = styled('span')`
 class LogList extends Component {
 	state = {
 		logs: [],
-		totalLogCount: 0,
-		editedLogs: 0,
-		mostLoggedDay: '',
-		mostLoggedDayCount: 0
+		totalLogCount: 0
 	};
 
 	componentDidMount() {
 		this.retrieveLogs();
 		this.addLogListener();
+		this.deleteLogListener();
 	}
 
 	retrieveLogs = () => {
@@ -65,22 +63,25 @@ class LogList extends Component {
 		logs.map((log, i) => <LogItem key={i} log={log} />).reverse();
 
 	addLogListener = () => {
-		let loadedlogs = [];
-		firebaseLogs.on('child_added', snap => {
-			loadedlogs.push(snap.val());
-			this.setState({
-				logs: loadedlogs
-			});
+		firebaseLogs.on('child_added', () => {
+			this.retrieveLogs();
+		});
+	};
+
+	deleteLogListener = () => {
+		firebaseLogs.on('child_removed', () => {
+			this.retrieveLogs();
 		});
 	};
 
 	render() {
+		console.log(this.state.logs);
 		const { logs } = this.state;
-		console.log(logs);
 		return (
 			<LogListContainer>
 				<Stats>
-					<Title>all logs.</Title>
+					{logs.length ? <Title>all logs.</Title> : <Title>no logs. :(</Title>}
+
 					<Count>
 						<Label>total log count:</Label>
 						{` ${logs.length}`}
