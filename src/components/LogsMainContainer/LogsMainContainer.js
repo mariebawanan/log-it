@@ -6,10 +6,9 @@ import LogList from '../LogList/LogList';
 
 const MainContainer = styled('div')`
 	display: grid;
-	grid-template-areas:
-		'LogInput LogList'
-		'LogInput LogList';
-	background-color: #dfdfdf;
+	grid-template-columns: 4fr 5fr;
+	grid-gap: 1rem;
+	margin: 20px 40px;
 `;
 
 const LogsMainContainer = () => {
