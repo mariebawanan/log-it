@@ -6,9 +6,9 @@ import LogList from '../LogList/LogList';
 
 const MainContainer = styled('div')`
 	display: grid;
-	grid-template-columns: 4fr 5fr;
+	grid-template-columns: 4fr 5fr 1fr;
 	grid-gap: 1rem;
-	margin: 20px 40px;
+	margin: 2rem;
 `;
 
 const LogsMainContainer = () => {
