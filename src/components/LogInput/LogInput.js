@@ -23,7 +23,6 @@ const LogInputForm = styled('textArea')`
 	border: 1px solid #000000;
 	resize: none;
 	margin-top: 5%;
-	font-family: 'Quicksand', sans-serif;
 	background-color: #ffffff;
 	&:focus {
 		outline: none !important;
@@ -49,8 +48,42 @@ const Submit = styled('button')`
 	}
 `;
 
+const ErrorMessage = styled.span`
+	color: #fc361d;
+	font-size: 12px;
+	margin-left: 20px;
+	font-weight: 700;
+`;
+
 class LogInput extends Component {
+	state = {
+		logContent: '',
+		errorMessage: ''
+	};
+
+	setError = () => {
+		this.setState({ errorMessage: 'you have to write something.' });
+	};
+
+	clearError = () => {
+		this.setState({ errorMessage: '' });
+	};
+
+	isInputValid = ({ logContent }) => {
+		logContent = logContent.replace(/\s/g, '');
+		return logContent;
+	};
+
+	handleLogInput = event => {
+		let logContent = event.target.value;
+		this.setState({ logContent }, () => {
+			if (!this.isInputValid(this.state)) this.setError();
+			else this.clearError();
+		});
+	};
+
 	render() {
+		const { logContent, errorMessage } = this.state;
 		return (
 			<LogInputContainer>
 				<Title>
@@ -60,8 +93,12 @@ class LogInput extends Component {
 					rows='15'
 					cols='50'
 					placeholder='Hello, start writing...'
+					value={logContent}
+					onChange={this.handleLogInput}
+					onBlur={this.clearError}
 				/>
-				<Submit disabled> write log. </Submit>
+				<Submit onClick={this.handleSubmit}> write log. </Submit>
+				<ErrorMessage>{errorMessage}</ErrorMessage>
 			</LogInputContainer>
 		);
 	}
