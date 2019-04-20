@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { firebase, firebaseLogs } from '../../firebase';
 
 const LogInputContainer = styled('div')`
 	display: grid;
@@ -50,9 +51,8 @@ const Submit = styled('button')`
 
 const ErrorMessage = styled.span`
 	color: #fc361d;
-	font-size: 12px;
-	margin-left: 20px;
-	font-weight: 700;
+	font-size: 1rem;
+	font-weight: 500;
 `;
 
 class LogInput extends Component {
@@ -62,7 +62,7 @@ class LogInput extends Component {
 	};
 
 	setError = () => {
-		this.setState({ errorMessage: 'you have to write something.' });
+		this.setState({ errorMessage: 'ooops! you have to write something...' });
 	};
 
 	clearError = () => {
@@ -80,6 +80,33 @@ class LogInput extends Component {
 			if (!this.isInputValid(this.state)) this.setError();
 			else this.clearError();
 		});
+	};
+
+	handleSubmit = event => {
+		event.preventDefault();
+
+		if (this.isInputValid(this.state)) {
+			this.addLog(this.state);
+		} else {
+			this.setError();
+		}
+	};
+
+	addLog = ({ logContent }) => {
+		let dataToSubmit = {};
+		dataToSubmit['date'] = firebase.database.ServerValue.TIMESTAMP;
+		dataToSubmit['content'] = logContent;
+
+		firebaseLogs
+			.push(dataToSubmit)
+			.then(() => {
+				this.setState({ logContent: '' });
+			})
+			.catch(e => {
+				this.setState({
+					errorMessage: e.message
+				});
+			});
 	};
 
 	render() {
