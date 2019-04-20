@@ -1,9 +1,7 @@
 :root {
 	--primary: #6acccb;
-	--light: #dfdfdf;
-	--dark: #003333;
-	--black: #000000;
-	--delete: #ed4337;
+	--label: #a9a9a9;
+	--value: #dfdfdf;
 }
 
 * {

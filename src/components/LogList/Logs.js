@@ -8,7 +8,7 @@ const LogsContainer = styled('div')`
 `;
 
 const LogContainer = styled('div')`
-	grid-gap: 1.5rem;
+	grid-gap: 1rem;
 	display: grid;
 	border-bottom: 1px dashed var(--primary);
 	padding-bottom: 1rem;
@@ -18,6 +18,7 @@ const UtilContainer = styled('div')`
 	display: grid;
 	grid-template-columns: 5fr 5fr;
 	font-size: 0.75rem;
+	color: var(--label);
 `;
 
 const Text = styled('span')``;

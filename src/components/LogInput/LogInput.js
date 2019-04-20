@@ -27,14 +27,14 @@ const LogInputForm = styled('textArea')`
 	background-color: #ffffff;
 	&:focus {
 		outline: none !important;
-		border: 1px dashed #6acccb;
+		border: 1px dashed var(--primary);
 	}
 `;
 
 const Submit = styled('button')`
 	color: #ffffff;
 	font-size: 1.25rem;
-	background: #6acccb;
+	background: var(--primary);
 	padding: 5px 20px;
 	border: 1px solid #fff;
 	cursor: pointer;
@@ -42,9 +42,9 @@ const Submit = styled('button')`
 		outline: 0;
 	}
 	&:hover {
-		color: #6acccb;
+		color: var(--primary);
 		background: #fff;
-		border: 1px solid #6acccb;
+		border: 1px solid var(--primary);
 		font-weight: 700;
 	}
 `;

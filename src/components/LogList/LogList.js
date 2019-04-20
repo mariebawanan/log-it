@@ -16,10 +16,11 @@ const Stats = styled('div')`
 	grid-template-columns: 1fr 1fr 2fr;
 `;
 
-const Stat = styled('span')`
-	color: var(--primary);
-`;
+const Stat = styled('span')``;
 
+const Label = styled('span')`
+	color: var(--label);
+`;
 const Title = styled('span')`
 	font-size: 1.5rem;
 `;
@@ -29,15 +30,24 @@ class LogList extends Component {
 			<LogListContainer>
 				<Stats>
 					<Stat>
-						<FontAwesomeIcon icon='list-ol' /> total log count: 12
+						<Label>
+							<FontAwesomeIcon icon='list-ol' /> total log count:
+						</Label>{' '}
+						12
 					</Stat>
 					<Stat>
-						<FontAwesomeIcon icon='edit' />
-						edited logs: 12
+						<Label>
+							<FontAwesomeIcon icon='edit' />
+							edited logs:
+						</Label>{' '}
+						12
 					</Stat>
 					<Stat>
-						<FontAwesomeIcon icon='sort-amount-up' />
-						most logged day: April 22, 1996 (45 logs)
+						<Label>
+							<FontAwesomeIcon icon='sort-amount-up' />
+							most logged day:
+						</Label>{' '}
+						April 22, 1996 (45 logs)
 					</Stat>
 				</Stats>
 				<Title>all logs.</Title>
