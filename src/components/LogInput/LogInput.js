@@ -70,10 +70,7 @@ class LogInput extends Component {
 		this.setState({ errorMessage: '' });
 	};
 
-	isInputValid = ({ logContent }) => {
-		logContent = logContent.replace(/\s/g, '');
-		return logContent;
-	};
+	isInputValid = ({ logContent }) => logContent.replace(/\s/g, '');
 
 	handleLogInput = event => {
 		let logContent = event.target.value;

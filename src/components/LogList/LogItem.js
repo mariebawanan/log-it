@@ -18,7 +18,9 @@ const UtilContainer = styled('div')`
 	color: var(--label);
 `;
 
-const Text = styled('span')``;
+const Text = styled('span')`
+	white-space: pre-line;
+`;
 
 const ButtonsContainer = styled('span')`
 	display: grid;
