@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Alert from 'react-s-alert';
+
 import { firebase, firebaseLogs } from '../../firebase';
 
 const LogInputContainer = styled('div')`
@@ -99,6 +101,10 @@ class LogInput extends Component {
 			.push(dataToSubmit)
 			.then(() => {
 				this.setState({ logContent: '' });
+				Alert.success('Log successfully added!', {
+					position: 'top-right',
+					timeout: 2000
+				});
 			})
 			.catch(e => {
 				this.setState({
@@ -124,6 +130,7 @@ class LogInput extends Component {
 				/>
 				<Submit onClick={this.handleSubmit}> write log. </Submit>
 				<ErrorMessage>{errorMessage}</ErrorMessage>
+				<Alert stack={{ limit: 3 }} />
 			</LogInputContainer>
 		);
 	}

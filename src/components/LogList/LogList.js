@@ -76,6 +76,7 @@ class LogList extends Component {
 
 	render() {
 		const { logs } = this.state;
+		console.log(logs);
 		return (
 			<LogListContainer>
 				<Stats>

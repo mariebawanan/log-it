@@ -50,7 +50,7 @@ const LogItem = ({ log }) => {
 				<Text>{displayDates(log)} </Text>
 				<ButtonsContainer>
 					<FontAwesomeIcon icon='edit' />
-					<FontAwesomeIcon icon='trash' />
+					<FontAwesomeIcon icon='trash' onClick={this.deleteLog} />
 				</ButtonsContainer>
 			</UtilContainer>
 			<Text>{log.content}</Text>

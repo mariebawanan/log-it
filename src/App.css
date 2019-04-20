@@ -1,11 +1,20 @@
+* {
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+	background-color: #f5f5f5;
+}
+
+/*  CSS variables */
 :root {
 	--primary: #6acccb;
 	--label: #a9a9a9;
 	--value: #dfdfdf;
 }
 
-* {
-	box-sizing: border-box;
-	font-family: 'Roboto', sans-serif;
-	background-color: #f5f5f5;
+/* s-alert pop up*/
+.s-alert-box,
+.s-alert-wrapper,
+.s-alert-box-inner,
+.s-alert-box span {
+	background-color: transparent;
 }
