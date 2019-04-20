@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 
 import Alert from 'react-s-alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { firebaseLogs } from '../../firebase';
+
+import EditLogModal from './EditLogModal';
 
 const LogContainer = styled('div')`
 	grid-gap: 1rem;
@@ -24,7 +26,32 @@ const Text = styled('span')`
 	white-space: pre-line;
 `;
 
-const ButtonsContainer = styled('span')`
+const Action = styled('span')`
+	font-size: 14px;
+	color: #999999;
+	background: transparent;
+	border: none;
+	&:hover {
+		cursor: pointer;
+	}
+
+	&:focus {
+		outline: 0;
+	}
+
+	.edit {
+		&:hover {
+			color: var(--primary);
+		}
+	}
+	.delete {
+		&:hover {
+			color: #fc361d;
+		}
+	}
+`;
+
+const ButtonsContainer = styled('div')`
 	display: grid;
 	justify-self: end;
 	grid-template-columns: 1fr 1fr;
@@ -32,8 +59,11 @@ const ButtonsContainer = styled('span')`
 	font-size: 1rem;
 `;
 
-const LogItem = ({ log }) => {
-	const displayDates = log => {
+class LogItem extends Component {
+	state = {
+		showModal: false
+	};
+	displayDates = log => {
 		const posted = moment(log.date).format('MMM DD YYYY •  hh:mm a');
 		const edited = `${
 			log.lastEdit
@@ -45,7 +75,7 @@ const LogItem = ({ log }) => {
 		return `${posted} ${edited}`;
 	};
 
-	const deleteLog = () => {
+	deleteLog = log => {
 		const id = log.id;
 		firebaseLogs
 			.child(`${id}`)
@@ -58,22 +88,34 @@ const LogItem = ({ log }) => {
 			});
 	};
 
-	return (
-		<LogContainer>
-			<UtilContainer>
-				<Text>{displayDates(log)} </Text>
-				<ButtonsContainer>
-					<Text>
-						<FontAwesomeIcon icon='edit' />
-					</Text>
-					<Text onClick={deleteLog}>
-						<FontAwesomeIcon icon='trash' />
-					</Text>
-				</ButtonsContainer>
-			</UtilContainer>
-			<Text>{log.content}</Text>
-		</LogContainer>
-	);
-};
+	editLog = () => {};
+	render() {
+		const { log } = this.props;
+		const { showModal } = this.state;
+		return (
+			<LogContainer>
+				<UtilContainer>
+					<Text>{this.displayDates(log)} </Text>
+					<ButtonsContainer>
+						<Action onClick={this.editLog}>
+							<FontAwesomeIcon className='edit' icon='edit' />
+						</Action>
+						<Action onClick={this.deleteLog(log)}>
+							<FontAwesomeIcon className='delete' icon='trash' />
+						</Action>
+					</ButtonsContainer>
+				</UtilContainer>
+				<Text>{log.content}</Text>
+
+				<EditLogModal
+					log={log}
+					showModal={showModal}
+					updateLog={this.updateLog}
+					closeModal={this.handleCloseModal}
+				/>
+			</LogContainer>
+		);
+	}
+}
 
 export default LogItem;
