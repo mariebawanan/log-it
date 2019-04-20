@@ -18,7 +18,7 @@ const Cursive = styled(Title)`
 	font-family: 'Meddon', cursive;
 `;
 
-const LogInputForm = styled('textArea')`
+const LogInputForm = styled('textarea')`
 	font-size: 14px;
 	padding: 10px;
 	box-sizing: border-box;

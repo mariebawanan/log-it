@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { firebaseLogs, firebaseLooper } from '../../firebase';
 
-import Logs from './Logs';
+import LogItem from './LogItem';
 
 const LogListContainer = styled('div')`
 	display: grid;
@@ -12,12 +11,19 @@ const LogListContainer = styled('div')`
 	grid-gap: 50px;
 `;
 
-const Stats = styled('div')`
+const LogsContainer = styled('div')`
 	display: grid;
-	grid-template-columns: 1fr 1fr 2fr;
+	grid-gap: 2rem;
 `;
 
-const Stat = styled('span')``;
+const Stats = styled('div')`
+	display: grid;
+	grid-template-columns: 4fr 4fr;
+`;
+
+const Count = styled('span')`
+	justify-self: end;
+`;
 
 const Label = styled('span')`
 	color: var(--label);
@@ -25,6 +31,7 @@ const Label = styled('span')`
 const Title = styled('span')`
 	font-size: 1.5rem;
 `;
+
 class LogList extends Component {
 	state = {
 		logs: [],
@@ -34,13 +41,17 @@ class LogList extends Component {
 		mostLoggedDayCount: 0
 	};
 
+	componentDidMount() {
+		this.retrieveLogs();
+		this.addLogListener();
+	}
+
 	retrieveLogs = () => {
 		firebaseLogs
 			.orderByChild('date')
 			.once('value')
 			.then(snapshot => {
 				const logs = firebaseLooper(snapshot);
-				console.log(logs);
 				this.setState({
 					logs
 				});
@@ -50,38 +61,32 @@ class LogList extends Component {
 			});
 	};
 
-	componentDidMount() {
-		this.retrieveLogs();
-	}
+	renderLogs = logs =>
+		logs.map((log, i) => <LogItem key={i} log={log} />).reverse();
+
+	addLogListener = () => {
+		let loadedlogs = [];
+		firebaseLogs.on('child_added', snap => {
+			loadedlogs.push(snap.val());
+			this.setState({
+				logs: loadedlogs
+			});
+		});
+	};
 
 	render() {
 		const { logs } = this.state;
 		return (
 			<LogListContainer>
 				<Stats>
-					<Stat>
-						<Label>
-							<FontAwesomeIcon icon='list-ol' /> total log count:
-						</Label>{' '}
-						12
-					</Stat>
-					<Stat>
-						<Label>
-							<FontAwesomeIcon icon='edit' />
-							edited logs:
-						</Label>{' '}
-						12
-					</Stat>
-					<Stat>
-						<Label>
-							<FontAwesomeIcon icon='sort-amount-up' />
-							most logged day:
-						</Label>{' '}
-						April 22, 1996 (45 logs)
-					</Stat>
+					<Title>all logs.</Title>
+					<Count>
+						<Label>total log count:</Label>
+						{` ${logs.length}`}
+					</Count>
 				</Stats>
-				<Title>all logs.</Title>
-				<Logs logs={logs} />
+
+				<LogsContainer>{this.renderLogs(logs)}</LogsContainer>
 			</LogListContainer>
 		);
 	}
