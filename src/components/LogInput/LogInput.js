@@ -6,6 +6,7 @@ const LogInputContainer = styled('div')`
 	display: grid;
 	justify-self: center;
 	grid-gap: 1em;
+	max-height: 100px;
 `;
 
 const Title = styled('span')`

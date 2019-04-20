@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { firebaseLogs, firebaseLooper } from '../../firebase';
 
 import Logs from './Logs';
 
@@ -25,7 +26,36 @@ const Title = styled('span')`
 	font-size: 1.5rem;
 `;
 class LogList extends Component {
+	state = {
+		logs: [],
+		totalLogCount: 0,
+		editedLogs: 0,
+		mostLoggedDay: '',
+		mostLoggedDayCount: 0
+	};
+
+	retrieveLogs = () => {
+		firebaseLogs
+			.orderByChild('date')
+			.once('value')
+			.then(snapshot => {
+				const logs = firebaseLooper(snapshot);
+				console.log(logs);
+				this.setState({
+					logs
+				});
+			})
+			.catch(e => {
+				console.log(e);
+			});
+	};
+
+	componentDidMount() {
+		this.retrieveLogs();
+	}
+
 	render() {
+		const { logs } = this.state;
 		return (
 			<LogListContainer>
 				<Stats>
@@ -51,7 +81,7 @@ class LogList extends Component {
 					</Stat>
 				</Stats>
 				<Title>all logs.</Title>
-				<Logs />
+				<Logs logs={logs} />
 			</LogListContainer>
 		);
 	}
