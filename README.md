@@ -2,11 +2,7 @@
 
 > An online logging app bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Built with [styled-components](https://www.styled-components.com) and utilizes CSS grid. Deployed to Heroku.
 
----
-
 Check it out [here](https://react-log-it.herokuapp.com/, 'log it!')!
-
----
 
 ## :computer: Installation
 
@@ -44,4 +40,4 @@ Check it out [here](https://react-log-it.herokuapp.com/, 'log it!')!
 
 ## :globe_with_meridians: Deploying to [Heroku](https://www.heroku.com/)
 
-This is a [comprehensive tutorial](<(https://medium.com/jeremy-gottfrieds-tech-blog/tutorial-how-to-deploy-a-production-react-app-to-heroku-c4831dfcfa08)>) that I followed in deploying this web app to Heroku. But instead of `yarn`, I used `npm` for consistency.
+This is a [comprehensive tutorial](https://medium.com/jeremy-gottfrieds-tech-blog/tutorial-how-to-deploy-a-production-react-app-to-heroku-c4831dfcfa08) that I followed in deploying this web app to Heroku. But instead of `yarn`, I used `npm` for consistency.
