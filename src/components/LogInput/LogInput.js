@@ -9,6 +9,11 @@ const LogInputContainer = styled('div')`
 	justify-self: center;
 	grid-gap: 1em;
 	max-height: 100px;
+
+	@media (max-width: 800px) {
+		grid-template-columns: 1fr;
+		justify-self: stretch;
+	}
 `;
 
 const Title = styled('span')`

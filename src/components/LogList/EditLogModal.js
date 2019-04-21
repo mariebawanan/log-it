@@ -8,6 +8,10 @@ import { firebase, firebaseLogs } from '../../firebase';
 const EditModal = styled(ReactModal)`
 	position: absolute;
 	outline: none !important;
+
+	@media (max-width: 800px) {
+		width: 100%;
+	}
 `;
 
 const LogInputContainer = styled('div')`
@@ -70,7 +74,7 @@ const EditButtonModal = styled(ModalButton)`
 	}
 `;
 
-const customStyles = {
+const webStyle = {
 	overlay: {
 		position: 'fixed',
 		top: 0,
@@ -177,7 +181,7 @@ class EditLogModal extends Component {
 				isOpen={showModal}
 				ariaHideApp={false}
 				contentLabel='Edit Log'
-				style={customStyles}
+				style={webStyle}
 				onRequestClose={this.handleCloseModal}
 				shouldCloseOnOverlayClick={true}
 			>

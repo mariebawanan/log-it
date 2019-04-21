@@ -9,6 +9,10 @@ const LogListContainer = styled('div')`
 	grid-template-columns: 1fr;
 	grid-auto-rows: min-content max-content auto;
 	grid-gap: 50px;
+
+	@media (max-width: 800px) {
+		margin-top: 425px;
+	}
 `;
 
 const LogsContainer = styled('div')`
