@@ -28,7 +28,7 @@ const Text = styled('span')`
 
 const Action = styled('span')`
 	font-size: 14px;
-	color: #999999;
+	color: var(--label);
 	background: transparent;
 	border: none;
 	&:hover {
@@ -46,7 +46,7 @@ const Action = styled('span')`
 	}
 	.delete {
 		&:hover {
-			color: #fc361d;
+			color: var(--error);
 		}
 	}
 `;

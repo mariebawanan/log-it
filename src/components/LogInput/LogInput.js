@@ -29,10 +29,10 @@ const LogInputForm = styled('textarea')`
 	font-size: 14px;
 	padding: 10px;
 	box-sizing: border-box;
-	border: 1px solid #000000;
+	border: 1px solid var(--black);
 	resize: none;
 	margin-top: 5%;
-	background-color: #ffffff;
+	background-color: var(--white);
 	&:focus {
 		outline: none !important;
 		border: 1px dashed var(--primary);
@@ -40,25 +40,25 @@ const LogInputForm = styled('textarea')`
 `;
 
 const Submit = styled('button')`
-	color: #ffffff;
+	color: var(--white);
 	font-size: 1.25rem;
 	background: var(--primary);
 	padding: 5px 20px;
-	border: 1px solid #fff;
+	border: 1px solid var(--white);
 	cursor: pointer;
 	&:focus {
 		outline: 0;
 	}
 	&:hover {
 		color: var(--primary);
-		background: #fff;
+		background: var(--white);
 		border: 1px solid var(--primary);
 		font-weight: 700;
 	}
 `;
 
 const ErrorMessage = styled.span`
-	color: #fc361d;
+	color: var(--error);
 	font-size: 1rem;
 	font-weight: 500;
 `;

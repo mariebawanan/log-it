@@ -25,10 +25,10 @@ const LogInputForm = styled('textarea')`
 	font-size: 14px;
 	padding: 10px;
 	box-sizing: border-box;
-	border: 1px solid #000000;
+	border: 1px solid var(--black);
 	resize: none;
 	margin-top: 5%;
-	background-color: #ffffff;
+	background-color: var(--white);
 	&:focus {
 		outline: none !important;
 		border: 1px dashed var(--primary);
@@ -36,18 +36,18 @@ const LogInputForm = styled('textarea')`
 `;
 
 const ErrorMessage = styled.span`
-	color: #fc361d;
+	color: var(--error);
 	font-size: 1rem;
 	font-weight: 500;
 `;
 
 const ModalButton = styled.button`
-	color: #ffffff;
+	color: var(--white);
 	font-size: 15px;
 	font-weight: 500;
-	background: #6acccb;
+	background: var(--primary);
 	padding: 5px 20px;
-	border: 1px solid #fff;
+	border: 1px solid var(--white);
 	margin-top: 2%;
 	cursor: pointer;
 	&:focus {
@@ -59,7 +59,7 @@ const CancelModal = styled(ModalButton)`
 	background: #999999;
 	margin-left: 2%;
 	:hover {
-		background: #fff;
+		background: var(--white);
 		color: #999999;
 		border: 1px solid #999999;
 	}
@@ -67,9 +67,9 @@ const CancelModal = styled(ModalButton)`
 
 const EditButtonModal = styled(ModalButton)`
 	:hover {
-		color: #6acccb;
-		background: #fff;
-		border: 1px solid #6acccb;
+		color: var(--primary);
+		background: var(--white);
+		border: 1px solid var(--primary);
 		font-weight: 500;
 	}
 `;

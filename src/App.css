@@ -9,6 +9,9 @@
 	--primary: #6acccb;
 	--label: #a9a9a9;
 	--value: #dfdfdf;
+	--white: #ffffff;
+	--black: #000000;
+	--error: #fc361d;
 }
 
 /* s-alert pop up*/
