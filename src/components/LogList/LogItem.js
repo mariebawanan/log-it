@@ -17,7 +17,7 @@ const LogContainer = styled('div')`
 
 const UtilContainer = styled('div')`
 	display: grid;
-	grid-template-columns: 5fr 5fr;
+	grid-template-columns: 5fr 2fr;
 	font-size: 0.75rem;
 	color: var(--label);
 `;
@@ -56,7 +56,7 @@ const ButtonsContainer = styled('div')`
 	justify-self: end;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 0.75rem;
-	font-size: 1rem;
+	font-size: 1.5rem;
 `;
 
 class LogItem extends Component {
@@ -75,20 +75,27 @@ class LogItem extends Component {
 		return `${posted} ${edited}`;
 	};
 
-	deleteLog = log => {
-		const id = log.id;
+	deleteLog = () => {
+		const id = this.props.log.id;
 		firebaseLogs
 			.child(`${id}`)
 			.remove()
 			.then(() => {
 				Alert.warning('Log deleted!', {
 					position: 'top-right',
+					effect: 'flip',
 					timeout: 2000
 				});
 			});
 	};
 
-	editLog = () => {};
+	editLog = () => {
+		this.setState({ showModal: true });
+	};
+
+	handleCloseModal = () => {
+		this.setState({ showModal: false });
+	};
 	render() {
 		const { log } = this.props;
 		const { showModal } = this.state;
@@ -100,7 +107,7 @@ class LogItem extends Component {
 						<Action onClick={this.editLog}>
 							<FontAwesomeIcon className='edit' icon='edit' />
 						</Action>
-						<Action onClick={this.deleteLog(log)}>
+						<Action onClick={this.deleteLog}>
 							<FontAwesomeIcon className='delete' icon='trash' />
 						</Action>
 					</ButtonsContainer>
@@ -110,7 +117,6 @@ class LogItem extends Component {
 				<EditLogModal
 					log={log}
 					showModal={showModal}
-					updateLog={this.updateLog}
 					closeModal={this.handleCloseModal}
 				/>
 			</LogContainer>

@@ -103,6 +103,7 @@ class LogInput extends Component {
 				this.setState({ logContent: '' });
 				Alert.success('Log added!', {
 					position: 'top-right',
+					effect: 'flip',
 					timeout: 2000
 				});
 			})

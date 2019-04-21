@@ -42,6 +42,7 @@ class LogList extends Component {
 		this.retrieveLogs();
 		this.addLogListener();
 		this.deleteLogListener();
+		this.editLogListener();
 	}
 
 	retrieveLogs = () => {
@@ -74,14 +75,22 @@ class LogList extends Component {
 		});
 	};
 
+	editLogListener = () => {
+		firebaseLogs.on('child_changed', () => {
+			this.retrieveLogs();
+		});
+	};
+
 	render() {
-		console.log(this.state.logs);
 		const { logs } = this.state;
 		return (
 			<LogListContainer>
 				<Stats>
-					{logs.length ? <Title>all logs.</Title> : <Title>no logs. :(</Title>}
-
+					{logs.length ? (
+						<Title>all logs.</Title>
+					) : (
+						<Title>no logs. write one!</Title>
+					)}
 					<Count>
 						<Label>total log count:</Label>
 						{` ${logs.length}`}
