@@ -2,7 +2,7 @@
 
 > An online logging app bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Built with [styled-components](https://www.styled-components.com) and utilizes CSS grid. Deployed with Heroku.
 
-Check it out [here](https://react-log-it.herokuapp.com/, 'log it!')!
+Check it out [here](https://log-it-react.herokuapp.com/, 'log it!')!
 
 #### :computer: Installation
 
