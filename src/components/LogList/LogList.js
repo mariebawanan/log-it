@@ -35,7 +35,7 @@ const Title = styled('span')`
 class LogList extends Component {
 	state = {
 		logs: [],
-		totalLogCount: 0
+		loading: true
 	};
 
 	componentDidMount() {
@@ -52,7 +52,8 @@ class LogList extends Component {
 			.then(snapshot => {
 				const logs = firebaseLooper(snapshot);
 				this.setState({
-					logs
+					logs,
+					loading: false
 				});
 			})
 			.catch(e => {
@@ -82,20 +83,26 @@ class LogList extends Component {
 	};
 
 	render() {
-		const { logs } = this.state;
+		const { logs, loading } = this.state;
 		return (
 			<LogListContainer>
-				<Stats>
-					{logs.length ? (
-						<Title>all logs.</Title>
-					) : (
-						<Title>no logs. write one!</Title>
-					)}
-					<Count>
-						<Label>total log count:</Label>
-						{` ${logs.length}`}
-					</Count>
-				</Stats>
+				{loading ? (
+					<Stats>
+						<Title>loading logs...</Title>
+					</Stats>
+				) : (
+					<Stats>
+						{logs.length ? (
+							<Title>all logs.</Title>
+						) : (
+							<Title>no logs. write one!</Title>
+						)}
+						<Count>
+							<Label>total log count:</Label>
+							{` ${logs.length}`}
+						</Count>
+					</Stats>
+				)}
 
 				<LogsContainer>{this.renderLogs(logs)}</LogsContainer>
 			</LogListContainer>
